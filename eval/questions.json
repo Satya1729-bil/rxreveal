@@ -1,0 +1,195 @@
+{
+  "about": "Answer key for data/sample_medical_records.pdf, the fake records made by scripts/make_sample_pdf.py with its defaults (seed 7, 30 patients). tests/test_evaluate.py checks this key against the generator.",
+  "patients": {
+    "1": "Maria Ortiz",
+    "2": "Aisha Nguyen",
+    "3": "Victor Reed",
+    "4": "Grace Moore",
+    "5": "Daniel Menon",
+    "6": "Curtis Kim",
+    "7": "Curtis Lopez",
+    "8": "Hannah Lopez",
+    "9": "Lucas Iyer",
+    "10": "Priya Fleming",
+    "11": "Kevin Bell",
+    "12": "Curtis Patel",
+    "13": "Zoe Fleming",
+    "14": "Hannah Menon",
+    "15": "Noah Ortiz",
+    "16": "Meera Nguyen",
+    "17": "Jason Fleming",
+    "18": "Priya Wells",
+    "19": "Aisha Hassan",
+    "20": "Curtis Brooks",
+    "21": "Lina Iyer",
+    "22": "Priya Shaw",
+    "23": "Kevin Iyer",
+    "24": "Aisha Kim",
+    "25": "Aisha Ortiz",
+    "26": "Lina Wells",
+    "27": "Curtis Nguyen",
+    "28": "Arjun Nguyen",
+    "29": "Curtis Das",
+    "30": "Priya Khan"
+  },
+  "questions": [
+    {
+      "id": "fact-01",
+      "type": "fact",
+      "question": "What disease does Patient 5 have?",
+      "patient": 5,
+      "expect": [
+        "Pneumonia"
+      ]
+    },
+    {
+      "id": "fact-02",
+      "type": "fact",
+      "question": "What treatment did Victor Reed receive?",
+      "patient": 3,
+      "expect": [
+        "Corticosteroids",
+        "Antibiotics"
+      ]
+    },
+    {
+      "id": "fact-03",
+      "type": "fact",
+      "question": "What is the follow-up period for Patient 17?",
+      "patient": 17,
+      "expect": [
+        [
+          "6 week",
+          "six week"
+        ]
+      ]
+    },
+    {
+      "id": "fact-04",
+      "type": "fact",
+      "question": "What was Lucas Iyer's blood pressure at the checkup?",
+      "patient": 9,
+      "expect": [
+        "160/100"
+      ]
+    },
+    {
+      "id": "fact-05",
+      "type": "fact",
+      "question": "How old is Priya Khan?",
+      "patient": 30,
+      "expect": [
+        "28"
+      ]
+    },
+    {
+      "id": "fact-06",
+      "type": "fact",
+      "question": "What symptoms does Grace Moore have?",
+      "patient": 4,
+      "expect": [
+        "Fever",
+        "Headache",
+        "Sore throat"
+      ]
+    },
+    {
+      "id": "fact-07",
+      "type": "fact",
+      "question": "What was Kevin Bell's temperature at the checkup?",
+      "patient": 11,
+      "expect": [
+        "103.7"
+      ]
+    },
+    {
+      "id": "fact-08",
+      "type": "fact",
+      "question": "Which disease does Hannah Lopez have, and how is it treated?",
+      "patient": 8,
+      "expect": [
+        "Asthma",
+        "Corticosteroids",
+        "Inhaler"
+      ]
+    },
+    {
+      "id": "list-01",
+      "type": "list",
+      "question": "List the names of all patients with pneumonia.",
+      "patients": [
+        5,
+        14,
+        27,
+        29
+      ]
+    },
+    {
+      "id": "list-02",
+      "type": "list",
+      "question": "List the names of all patients with asthma.",
+      "patients": [
+        8,
+        30
+      ]
+    },
+    {
+      "id": "list-03",
+      "type": "list",
+      "question": "List the names of all patients with arthritis.",
+      "patients": [
+        17,
+        24,
+        28
+      ]
+    },
+    {
+      "id": "list-04",
+      "type": "list",
+      "question": "List the names of all patients with tuberculosis.",
+      "patients": [
+        2,
+        3,
+        11,
+        13,
+        15,
+        20,
+        23
+      ]
+    },
+    {
+      "id": "list-05",
+      "type": "list",
+      "question": "Which patients had a temperature above 103 °F?",
+      "patients": [
+        11,
+        13
+      ]
+    },
+    {
+      "id": "list-06",
+      "type": "list",
+      "question": "Which patients are treated with insulin?",
+      "patients": [
+        1,
+        10,
+        18
+      ]
+    },
+    {
+      "id": "none-01",
+      "type": "not_found",
+      "question": "What is Patient 45's diagnosis?"
+    },
+    {
+      "id": "none-02",
+      "type": "not_found",
+      "question": "What is Maria Ortiz's blood type?"
+    },
+    {
+      "id": "none-03",
+      "type": "not_found",
+      "question": "Which patients have malaria?"
+    }
+  ]
+}
