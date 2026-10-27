@@ -241,8 +241,8 @@ Install:
 ### 1. Clone the Repository
 
 ```bash
-git clone https://github.com/Satya1729-bil/GEN-AI.git
-cd GEN-AI
+git clone https://github.com/Satya1729-bil/rxreveal.git
+cd rxreveal
 ```
 
 Ensure you are in the project directory containing `app.py` and the `rxreveal/` package.
@@ -287,4 +287,69 @@ GEMINI_API_KEY=your_gemini_api_key_here
 
 Replace the placeholder with your actual key. Keep `.env` out of Git and never commit API keys to the repository.
 
-### 6. Add
+### 6. Add Documents and Build the Index
+
+The repository already includes `data/sample_medical_records.pdf`, a synthetic file with 30 fake patients. To use your own documents, put PDF files in `data/`, then build the index:
+
+```bash
+python -m rxreveal.build_index
+```
+
+The app also builds the index on first start if it is missing.
+
+### 7. Run the App
+
+```bash
+streamlit run app.py
+```
+
+Open http://localhost:8501 in your browser.
+
+### 8. Run the Tests
+
+```bash
+pytest -q
+```
+
+The tests use a fake embedder and a fake model, so they need no API key. GitHub Actions runs them on every push.
+
+## Run with Docker
+
+```bash
+docker compose up --build
+```
+
+Docker Compose reads `.env`, keeps your documents in `./data`, and serves the app at http://localhost:8501.
+
+## Deploy for Free on Streamlit Community Cloud
+
+1. Sign in at [share.streamlit.io](https://share.streamlit.io) with your GitHub account.
+2. Choose **Create app**, then pick this repository, the `main` branch, and `app.py` as the main file.
+3. Open **Advanced settings**, choose Python 3.11 or 3.12, and paste your secrets:
+
+```toml
+GEMINI_API_KEY = "your_gemini_api_key_here"
+RX_ALLOW_UPLOAD = "false"
+```
+
+4. Deploy. On first start, the app indexes the sample PDF in `data/`.
+
+Streamlit passes top-level secrets to the app as environment variables, which is how RxReveal reads its settings. Turning uploads off keeps a public demo on the fake sample data, so nobody sends real patient records through your free-tier key. Add `APP_PASSWORD` as well if you want to limit who can use the demo.
+
+## Evaluation
+
+`eval/questions.json` holds 17 test questions about the sample PDF. Their answer key comes from the same seeded generator that made the PDF (`scripts/make_sample_pdf.py`), and `tests/test_evaluate.py` checks the key against the generator on every CI run.
+
+The questions cover three kinds of request:
+
+- **Single-patient lookups (8):** for example, "What treatment did Victor Reed receive?"
+- **List questions (6):** for example, "List the names of all patients with pneumonia." These need every matching record, so they also test retrieval.
+- **Questions the documents cannot answer (3):** for example, "What is Maria Ortiz's blood type?" The correct answer is to say so.
+
+Run it with your Gemini key set:
+
+```bash
+python -m rxreveal.evaluate
+```
+
+It prints a scored report and saves it to `eval/results.md`. Add `--top-k 10` to see how list answers change when more passages are retrieved.
