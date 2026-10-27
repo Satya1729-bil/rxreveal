@@ -1,6 +1,8 @@
-# RxReveal: Medical Document Assistant
+# RxReveal
 
-RxReveal is a Retrieval-Augmented Generation (RAG) application that answers questions about medical PDF documents. It uses semantic search with Gemini embeddings, FAISS vector indexing, and Google Gemini to generate concise answers grounded in retrieved passages, with page references for verification.
+**Answers from medical PDFs, with the page numbers to check them.**
+
+RxReveal answers plain-English questions about medical PDFs. Each answer is grounded in passages it retrieves from the document and lists the pages they came from, so you can verify it instead of trusting it. It runs locally, in Docker, or in the cloud.
 
 Originally developed from a Kaggle notebook for the Google × Kaggle Gen AI Intensive Course Capstone 2025Q1, this version is a complete application that can run locally in VS Code, in Docker, or on a compatible cloud platform.
 
